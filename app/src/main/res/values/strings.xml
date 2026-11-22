@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ApiServiceApp</string>
+    <string name="TextOpen">API Practice App</string>
+    <string name="GET">Mengambil Data</string>
+    <string name="POST">Menambahkan Data</string>
+    <string name="PUT">Mengupdate Data</string>
+    <string name="DELETE">Menghapus Data</string>
+    <string name="RESPON">RESPON API</string>
+    <string name="NotFound">Belum Ada Respon</string>
+</resources>
