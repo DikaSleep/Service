@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 try {
-                    val result = ApiService.post("/posts",body.toString())
+                    val result = ApiService.post("/posts",body.toString(), headers)
 
                     binding.tvResponse.text = result
                 }catch (e: Exception){
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
             lifecycleScope.launch {
                 try{
-                    val result = ApiService.put("/posts/1", body.toString())
+                    val result = ApiService.put("/posts/1", body.toString(), headers)
 
                     binding.tvResponse.text = result
                 }catch (e: Exception){
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnDelete.setOnClickListener {
             lifecycleScope.launch {
                 try{
-                    val result = ApiService.delete("/posts/1")
+                    val result = ApiService.delete("/posts/1", headers)
                     binding.tvResponse.text = result
 
                 }catch (e: Exception){
