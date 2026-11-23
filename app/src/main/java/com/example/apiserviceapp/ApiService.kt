@@ -11,24 +11,38 @@ object ApiService {
     private const val BASE_URL =
         "https://jsonplaceholder.typicode.com"
 
-    //HTTP GET
-    suspend fun get(endpoint: String): String{
-        return request(endpoint, "GET")
+// HTTP GET
+    suspend fun get(
+        endpoint: String,
+        headers: Map<String, String> = emptyMap()
+    ): String {
+        return request(endpoint, "GET", headers = headers)
     }
 
-    //HTTP POST
-    suspend fun post(endpoint: String, body: String): String{
-        return request(endpoint, "POST", body)
+    // HTTP POST
+    suspend fun post(
+        endpoint: String,
+        body: String,
+        headers: Map<String, String> = emptyMap()
+    ): String {
+        return request(endpoint, "POST", body, headers)
     }
 
-    //HTTP PUT
-    suspend fun put(endpoint: String, body: String): String{
-        return request(endpoint, "PUT", body)
+    // HTTP PUT
+    suspend fun put(
+        endpoint: String,
+        body: String,
+        headers: Map<String, String> = emptyMap()
+    ): String {
+        return request(endpoint, "PUT", body, headers)
     }
 
-    //HTTP DELETE
-    suspend fun delete(endpoint: String): String{
-        return request(endpoint, "DELETE")
+    // HTTP DELETE
+    suspend fun delete(
+        endpoint: String,
+        headers: Map<String, String> = emptyMap()
+    ): String {
+        return request(endpoint, "DELETE", headers = headers)
     }
     // Fungsi utama untuk mengirim HTTP Request
     suspend fun request(
@@ -51,6 +65,7 @@ object ApiService {
                 "Accept", "application/json"
             )
 
+            //authentication lewat header
             headers.forEach { (key, value) ->
                 connection.setRequestProperty(key, value)
             }

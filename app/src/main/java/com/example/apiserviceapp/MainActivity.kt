@@ -19,11 +19,25 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // authentication bearer token
+        val token = "TOKEN_KAMU"
+
+        //headers
+
+        // bagian penting
+        val headers = mapOf(
+            "Accept" to "application/json",
+            "User-Agent" to "ApiServiceApp",
+            "Authorization" to "Bearer $token"
+        )
+
         // get
         binding.btnGet.setOnClickListener {
+            val userId = 1
+
             lifecycleScope.launch {
                 try {
-                    val result = ApiService.get("/posts/1")
+                    val result = ApiService.get("/posts?userId=$userId", headers = headers)
 
                     binding.tvResponse.text = result
                 }catch (e: Exception){
@@ -36,8 +50,8 @@ class MainActivity : AppCompatActivity() {
         binding.btnPost.setOnClickListener {
 
             val body = JSONObject().apply {
-                put("Title", "Belajar Kotlin")
-                put("Body","Belajar REST API")
+                put("title", "Belajar Kotlin")
+                put("body","Belajar REST API")
                 put("userId", 1)
             }
 
@@ -62,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
             lifecycleScope.launch {
                 try{
-                    val result = ApiService.put("/post/1", body.toString())
+                    val result = ApiService.put("/posts/1", body.toString())
 
                     binding.tvResponse.text = result
                 }catch (e: Exception){
